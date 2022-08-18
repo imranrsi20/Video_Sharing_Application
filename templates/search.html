@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+
+{% block stylesheet %}
+    <Style>
+        .video_show{
+
+            margin-top:20px;
+            margin-left:30px;
+            height:182px;
+            float:left;
+            width:1156px;
+        }
+         #img{
+
+            float: left;
+
+            height: 180px;
+
+            width: 316px;
+        }
+        table{
+
+            margin-top:20px;
+        }
+        td{
+
+            height: 180px;
+
+        }
+        td #title{
+            margin-top: -22px;
+
+            margin-left: 10px;
+
+            color: black;
+
+            font-size: 24px;
+        }
+        p{
+            text-decoration:none;
+        }
+        #same{
+            color:gray;
+            text-decoration:none;
+            margin-left:10px;
+        }
+        #description{
+
+            color:gray;
+            text-decoration:none;
+            margin-left:10px;
+            font-size:18px;
+        }
+
+    </Style>
+{% endblock %}
+
+{% block container %}
+
+    <div class="video_show">
+        {% if video_found %}
+            {% for v in video_found %}
+                <table>
+                    <thead>
+                        <th></th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="{% url 'show' id=v.id %}">
+                                    <img id="img" src="{{v.video_cover_page.url}}" alt="RSI" >
+                                </a>
+                            </td>
+                            <td>
+                                    <a href="{% url 'show' id=v.id %}">
+                                        <p id="title">{{v.video_title|truncatewords:16}}</p>
+                                     </a>
+                                    <a href="{% url 'show' id=v.id %}">
+                                        <p id="description">{{v.short_description|truncatewords:23}}</p>
+                                     </a>
+
+                                    <a href="{% url 'channel' id=v.id %}">
+                                        <p id="same">{{v.uploader_name.channel_name|truncatewords:3}}</p>
+                                     </a>
+                                    <p id="same">{{v.published_day|timesince}} ago</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endfor %}
+
+
+
+
+
+
+
+        {% else %}
+
+            <h1>no video found</h1>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

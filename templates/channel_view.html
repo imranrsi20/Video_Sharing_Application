@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Channel view
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+        .background{
+            height:250px;
+            width:100%;
+            background-size:cover;
+        }
+        .background img{
+            height:250px;
+            width:100%;
+
+        }
+
+        .profile img{
+
+            height:100px;
+            width:100px;
+            margin-left:100px;
+            margin-top:10px;
+            border-radius:50%;
+
+        }
+        .bar{
+
+            margin-left:100px;
+        }
+        .bar ul li a{
+
+            font-size:19px;
+            font-weight:bold;
+            color:gray;
+        }
+
+         #img{
+            height:130px;
+            width:220px;
+        }
+
+        .tube{
+            width:220px;
+            height:200px;
+            float:left;
+            margin-top:35px;
+            margin-left:10px;
+
+
+        }
+         a {
+
+            color: black;
+            text-decoration: none;
+            font-size:19px;
+
+        }
+        .video{
+
+            margin-left:100px;
+        }
+        #date{
+
+            color:gray;
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+
+    <div class="background">
+        <img src="{{channel.uploader_name.channel_background_image.url}}">
+    </div>
+    <div class="profile">
+        <h1><img src="{{channel.uploader_name.profile_picture.url}}" > {{channel.uploader_name.channel_name}}</h1>
+
+    </div>
+    <div class="bar">
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="#">Video</a></li>
+          <li role="presentation"><a href="#">Channels</a></li>
+          <li role="presentation"><a href="#">About</a></li>
+        </ul>
+    </div>
+    <div class="video">
+        {% for video in all_video %}
+
+            <div class="tube">
+                <a href="{% url 'show' id=video.id %}">
+                    <img id="img" src="{{video.video_cover_page.url}}" alt="RSI" >
+                </a>
+
+                 <a href="{% url 'show' id=video.id %}">
+                    <p id="title">{{video.video_title|truncatewords:7}}</p>
+                 </a>
+
+                <p id="date" >{{video.published_day|timesince}} ago</p>
+
+
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

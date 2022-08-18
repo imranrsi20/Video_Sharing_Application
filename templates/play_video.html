@@ -1,0 +1,380 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+   youtube/{{vid.video_title}}
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+        .mid{
+
+            margin-top:20px;
+        }
+        .play{
+            float:left;
+            margin-left:40px;
+            margin-top:20px;
+            width:950px;
+        }
+         #img{
+
+            height:118px;
+            width:210px;
+        }
+         .channel{
+
+            font-size:16px;
+            font-weight:bold;
+            color:gray;
+            margin-top:25px;
+        }
+        #title{
+            font-size:25px;
+        }
+        .channel img{
+            height:40px;
+            width:40px;
+            border-radius:50%;
+            margin-left:38px;
+            float:left;
+        }
+        #c_n{
+
+            font-size:19px;
+            color:black;
+            font-weight:bold;
+            margin-left:100px;
+        }
+        #p_d{
+
+            color:gray;
+            margin-left:100px;
+        }
+        .comment{
+
+            margin-left:45px;
+        }
+        .video_comment{
+
+            margin-left:45px;
+        }
+        .comment input[type="text"]{
+
+            border:none;
+            border-bottom:1px solid gray;
+            outline:none;
+            height:40px;
+            font-size:17px;
+            width:800px;
+        }
+
+        .comment input[type="text"]:focus{
+
+                border-bottom:1px solid gray;
+        }
+        #pro{
+            border-radius:50%;
+        }
+        #com{
+
+            font-size:16px;
+             font-weight:bold;
+
+        }
+        #d{
+            color:gray;
+        }
+        #all_comment{
+
+            font-size:19px;
+        }
+        #no{
+            font-size:18px;
+            color:gray;
+        }
+        #create{
+
+            font-size:17px;
+            color:blue;
+        }
+        .col-md-1 {
+
+                width: 3.333%;
+                margin-top: -3px;
+                margin-left: 49px;
+
+            }
+        .col-md-3 {
+
+            width: 25%;
+            font-size: 17px;
+            color: gray;
+            font-weight: bold;
+            margin-left:36px;
+
+        }
+        .col-md-2 {
+
+            width: 18.66666667%;
+            font-size: 17px;
+            color: gray;
+
+        }
+        #like{
+
+            float:left;
+        }
+
+        #like_btn2 {
+
+            font-size: 32px;
+            border: none;
+            background: none;
+            color: gray;
+            margin-top: -20px;
+
+        }
+        #like_btn {
+
+            font-size: 32px;
+            border: none;
+            background: none;
+            color: gray;
+            margin-top:-8px;
+
+
+        }
+
+
+        #a_c{
+            text-decoration:none;
+            color:black;
+        }
+
+          #m_t{
+
+            color:black;
+            text-decoration:none;
+            font-size:17px;
+          }
+          #channel{
+
+            color:gray;
+            text-decoration:none;
+            font-weight:bold;
+          }
+          #share {
+
+            float: left;
+            font-size: 31px;
+            color: gray;
+            margin-top: -6px;
+
+        }
+
+        video{
+
+            position:relative;
+            width:100%;
+            top:0;
+            height:auto;
+        }
+        #sh{
+
+
+            font-weight:bold;
+        }
+        #sh a{
+            color:gray;
+            text-decoration:none;
+        }
+        #share_v{
+            width:122px;
+
+        }
+        #save{
+
+            font-size:20px;
+            color:gray;
+            font-weight:bold;
+            text-decoration:none;
+        }
+        #short_disc{
+
+            color:black;
+            font-style:verdana;
+            margin-left:98px;
+            font-size:15px;
+        }
+
+
+
+
+    </style>
+{% endblock %}
+
+{% block container %}
+
+           <div class="row">
+               <div class="col-md-8">
+
+
+                     <div class="play">
+
+                <video src="{{vid.your_video.url}}" height="420px" width="910px" controls="controls" autoplay></video>
+                         <p id="title">{{vid.video_title|truncatewords:12}}</p>
+            </div><br>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                           <div class="views">
+                               <p id="view">{{views}} views</p>
+
+                           </div>
+                        </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+
+                               <form  action="{% url 'like_video' %}" method="POST">
+                                   {% csrf_token %}
+                                   {% if is_liked %}
+                                    <p id="like">{{total_likes}} like </p>
+                                     <button id="like_btn" type="submit" name="video_id" value="{{vid.id}}" class="btn btn-primary"><i class="fas fa-thumbs-down"></i></button>
+                                   {% else %}
+                                   <p id="like">{{total_likes}} like</p>
+                                    <button id="like_btn2" type="submit" name="video_id" value="{{vid.id}}" class="btn btn-primary"><i class="fas fa-thumbs-up"></i></button>
+                                   {% endif %}
+                               </form>
+
+                        </div>
+                    <div class="col-md-2" id="share_v">
+
+
+
+                               <a id="share" href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"><i class="fas fa-share"></i></a>
+                                <p id="sh"><a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">SHARE</a></p>
+
+                    </div>
+                    <div class="col-md-1">
+                        <a id="save" href="{% url 'watch' id=vid.id %}">save</a>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+
+                   <div class="channel">
+                       <a href="{% url 'channel' id=vid.id %}"> <img id="c_p" src="{{vid.uploader_name.profile_picture.url}}" alt="Channel"></a>
+                       <p id="c_n"><a id="a_c" href="{% url 'channel' id=vid.id %}">{{vid.uploader_name.channel_name|truncatewords:3}}</a></p>
+                       <p id="p_d" >Published on {{vid.published_day.date}}</p>
+                       <p id="short_disc">{{vid.short_description|truncatewords:100}}</p>
+
+                   </div><br>
+
+
+
+
+                   <div class="row">
+                       <div class="col-md-10">
+                           <div class="comment">
+                                {% if all_comment %}
+                                <p id="all_comment">{{all_comment}} Comments</p>
+
+                               {% endif %}
+
+
+                                       <form class="my-ajax-form" action="" method="POST">
+                                           {% csrf_token %}
+                                           {{form.video_comment}}
+
+                                       </form>
+
+
+
+                            </div>
+                           <div class="video_comment">
+                                {% for comment in comment %}
+                                    <div class="single_post">
+
+                                        <h2 id="com"> <img id="pro" src="{{comment.commented_name.profile_picture.url}}" height="40px" width="40px;"> {{comment.commented_name.author_name.first_name}} {{comment.commented_name.author_name.last_name}} </h2>
+                                        <p id="d">{{comment.date.date}}</p>
+
+                                        <p>{{comment.video_comment}}</p>
+                                    </div>
+
+                                {% empty %}
+                                <h3 id="no">sorry no comment found</h3>
+                                {% endfor %}
+                            </div>
+
+                       </div>
+                       <div class="col-md-2"></div>
+                   </div>
+
+
+
+               </div>
+
+
+               <div class="col-md-4">
+                     {% for m in more %}
+
+                       <div class="mid">
+                            <div class="media">
+                              <div class="media-left">
+                                <a href="{% url 'show' id=m.id %}">
+                                  <img id="img" class="media-object" src="{{m.video_cover_page.url}}" alt="...">
+                                </a>
+                              </div>
+                              <div class="media-body">
+                               <a  id="m_t" href="{% url 'show' id=m.id %}"> <h4 class="media-heading">{{m.video_title|truncatewords:8}}</h4></a>
+                               <a id="channel" href="{% url 'channel' id=m.id %}"><p>{{m.uploader_name.channel_name|truncatewords:3}}</p></a>
+
+                              </div>
+                        </div>
+                       </div>
+                   {% endfor %}
+
+               </div>
+           </div>
+{% endblock %}
+
+{% block script %}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+        var $myForm=$('.my-ajax-form');
+        $myForm.submit(function(event){
+
+            event.preventDefault();
+            var $formData=$myForm.serialize();
+
+            $.ajax({
+                method:'POST',
+
+                data:$formData,
+                success:handleSuccess,
+                error:handleError,
+             });
+
+             function handleSuccess(data){
+
+                console.log(data);
+                $myForm[0].reset()
+              }
+
+              function handleError(ThrowError){
+
+                console.log(ThrowError);
+              }
+
+            });
+
+          });
+
+    </script>
+
+
+
+
+
+{% endblock %}

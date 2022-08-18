@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Create channel
+{% endblock %}
+
+{% block stylesheet %}
+
+    <style>
+        body{
+            background: #b9ebf7 ;
+        }
+       .left_f{
+
+            width:900px;
+
+
+       }
+       .left_s{
+            width:900px;
+
+            margin-top:50px;
+
+       }
+       .left_f h1{
+
+            font-size:18px;
+       }
+       .help{
+            background: #eff8fa ;
+            height:150px;
+            width:900px;
+            margin-top:100px;
+
+        }
+
+        .help h1{
+
+            font-size:16px;
+            font-weight:bold;
+            margin-left:20px;
+            padding:10px;
+
+        }
+        .help p{
+            margin-left:30px;
+        }
+
+          .first{
+
+            height: 200px;
+
+            width: 370px;
+
+            background: #eff8fa;
+
+            margin-top: 15px;
+
+            margin-left: 150px;
+
+        }
+         .second{
+
+
+            height: 200px;
+
+            width: 370px;
+
+            background: #eff8fa;
+
+            margin-top: 15px;
+
+            margin-left: 150px;
+        }
+         .third{
+
+            height: 200px;
+
+            width: 370px;
+
+            background: #eff8fa;
+
+            margin-top: 15px;
+
+            margin-left: 150px;
+        }
+           #i{
+            margin-left:20px;
+            margin-top:40px;
+            float:left;
+            margin-right:16px;
+        }
+        .right{
+
+            margin-top:50px;
+            margin-left:10px;
+            font-weight:bold
+        }
+          #y{
+
+            font-size:18px;
+            font-weight:bold;
+            margin-top:5px;
+            margin-left:15px;
+        }
+         #th{
+
+            margin-left:106px;
+        }
+        #channel{
+            float:left;
+            font-weight:bold;
+
+        }
+        .form-control {
+
+            display: block;
+            width: 598px;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+    }
+    #Ch{
+
+        margin-top:50px;
+        margin-left:150px;
+        width:120px;
+    }
+    .panel-title{
+
+        margin-left: 300px;
+
+        font-size: 22px;
+
+        font-weight: bold;
+    }
+    </style>
+{% endblock %}
+
+{% block container %}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+    <div class="left_f">
+        <h1>hey <a href="#">{{request.user.first_name}} {{request.user.last_name}}</a> you are a Registered user.</h1>
+        <h1>but you can upload/comment video.you have first create an MyTube channel Then upload/comment video.</h1>
+    </div>
+
+    <div class="left_s">
+        <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Create MyTube Channel</h3>
+                  </div>
+                  <div class="panel-body">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p id="channel">Channel Name :</p>{{form.channel_name}}<br>
+                            <p id="channel">Channel picture :</p>{{form.profile_picture}}<br>
+                            <p id="channel">Channel background image :</p>{{form.channel_background_image}}
+
+                            <button id="Ch" type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                  </div>
+        </div>
+    </div>
+     <div class="help">
+
+
+                        <h1>Help and Suggestions </h1>
+                        <p>By Creating your Channel to MyTube, you acknowledge that you agree to MyTube's <a href="#">Terms of Service</a> and <a href="#">Community Guidelines</a> . </p>
+                        <p>Please be sure not to violate others' copyright or privacy rights. <a href="#">Learn more</a> </p>
+                        <p>Upload instructions    |    Troubleshooting    |    Mobile uploads </p>
+
+
+     </div>
+        </div>
+    <div class="col-md-4">
+
+    <div class="first">
+
+                    <h1 id="y">Import videos </h1>
+                    <img id="i" src="{% static 'image/1.png' %}">
+                    <div class="right">
+                        <p>Import your videos from Google Photos </p>
+                        <button type="button" class="btn btn-success">Important</button>
+                    </div>
+
+                </div>
+                <div class="second">
+                    <h1 id="y">Live streaming </h1>
+                    <img id="i" src="{% static 'image/2.png' %}">
+                    <div class="right">
+                        <p>Set up your channel and stream live to your fans  </p>
+                        <button type="button" class="btn btn-success">Get Started</button>
+                    </div>
+
+                </div>
+                <div class="third">
+                    <h1 id="y">New! Premieres </h1>
+                    <img id="i" src="{% static 'image/3.png' %}">
+                    <div class="right">
+                        <p>Build the hype around your next video release. Premieres makes it easy to promote your video and engage with fans through live chat. </p>
+                        <button id="th" type="button" class="btn btn-success">Learn more</button>
+                    </div>
+                </div>
+        </div>
+    <div class="col-md-1"></div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

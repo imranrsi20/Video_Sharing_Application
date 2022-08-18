@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Account
+{% endblock %}
+
+{% block stylesheet %}
+
+
+    <style>
+        ul li{
+
+
+            list-style:none;
+            margin-top:15px;
+             font-size:19px;
+        }
+
+      #ancor{
+            text-decoration:none;
+            color:black;
+       }
+       ul li:hover{
+
+            background:gray;
+            color:white;
+            padding:5px;
+
+       }
+       #pro{
+
+          height:70px;
+          width:70px;
+          border-radius:50%;
+          margin-left:54px;
+          margin-top:15px;
+       }
+       #left{
+
+            height: 100%;
+            width:285px;
+            background-color: #e9e6e6;
+            position: fixed;
+
+        }
+        #right{
+
+
+            margin-left:286px;
+
+        }
+        .col-md-10 {
+
+            width: 5.333%;
+
+        }
+
+    </style>
+{% endblock %}
+
+{% block container %}
+
+    <div class="row">
+        <div class="col-md-2" id="left">
+            <img id="pro" src="{% static 'image/green3.jpg' %}">
+
+            <ul>
+                <li>
+                    <a id="ancor" href="#">View Profile</a>
+                </li>
+                <li>
+                    <a id="ancor" href="#">Edit Profile</a>
+                </li>
+                <li>
+                    <a id="ancor" href="#">Change Username</a>
+                </li>
+                <li>
+                    <a id="ancor" href="#">Change Password</a>
+                </li>
+
+                <li>
+                    <a id="ancor" href="#">Edit Channel Name</a>
+                </li>
+
+            </ul>
+
+        </div>
+        <div class="col-md-10" id="right">
+            <div class="image">
+                <img src="{% static 'image/green3.jpg' %}">
+                <p> hi {{request.user.first_name}} {{request.user.last_name}}</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

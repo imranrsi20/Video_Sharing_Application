@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Mbpi
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+         body{
+            background:  white   ;
+         }
+        #img{
+            height:130px;
+            width:220px;
+        }
+
+        .tube{
+            width:220px;
+            height:250px;
+            float:left;
+            margin-top:20px;
+            margin-left:20px;
+
+        }
+        .home{
+            margin-left:20px;
+        }
+        .tube a {
+
+            color: black;
+            text-decoration: none;
+            font-size:19px;
+
+        }
+        #channel{
+
+            font-size:16px;
+            font-weight:bold;
+            color:gray;
+        }
+        #date{
+            color:gray;
+        }
+        #cat{
+
+            font-size:22px;
+            font-weight:bold;
+            margin-top:10px;
+            margin-left:20px;
+        }
+
+        .home {
+
+
+            margin-left: 20px;
+            margin-top: 82px;
+
+        }
+
+    </style>
+{% endblock %}
+
+{% block container %}
+
+    <div class="home">
+        <div class="row">
+            {% if tutorial %}
+        <p id="cat">Tutorial</p>
+        {% for v in tutorial %}
+
+            <div class="tube">
+                <a href="{% url 'show' id=v.id %}">
+                    <img id="img" src="{{v.video_cover_page.url}}" alt="RSI" >
+                </a>
+
+                 <a href="{% url 'show' id=v.id %}">
+                    <p id="title">{{v.video_title|truncatewords:7}}</p>
+                 </a>
+                <a href="{% url 'channel' id=v.id %}">
+                    <p id="channel" >{{v.uploader_name.channel_name|truncatewords:3}}</p>
+                 </a>
+                <p id="date" >{{v.published_day|timesince}} ago</p>
+
+
+            </div>
+
+        {% endfor %}
+        {% endif %}
+        </div>
+        <div class="row">
+            {% if song %}
+        <p id="cat">Song</p>
+        {% for v in song %}
+
+            <div class="tube">
+                <a href="{% url 'show' id=v.id %}">
+                    <img id="img" src="{{v.video_cover_page.url}}" alt="RSI" >
+                </a>
+
+                 <a href="{% url 'show' id=v.id %}">
+                    <p id="title">{{v.video_title|truncatewords:7}}</p>
+                 </a>
+                <a href="{% url 'channel' id=v.id %}">
+                    <p id="channel" >{{v.uploader_name.channel_name|truncatewords:3}}</p>
+                 </a>
+                <p id="date" >{{v.published_day|timesince}} ago</p>
+
+
+            </div>
+
+        {% endfor %}
+        {% endif %}
+        </div>
+        <div class="row">
+            {% if natok %}
+        <p id="cat">Natok</p>
+        {% for v in natok %}
+
+            <div class="tube">
+                <a href="{% url 'show' id=v.id %}">
+                    <img id="img" src="{{v.video_cover_page.url}}" alt="RSI" >
+                </a>
+
+                 <a href="{% url 'show' id=v.id %}">
+                    <p id="title">{{v.video_title|truncatewords:7}}</p>
+                 </a>
+                <a href="{% url 'channel' id=v.id %}">
+                    <p id="channel" >{{v.uploader_name.channel_name|truncatewords:3}}</p>
+                 </a>
+                <p id="date" >{{v.published_day|timesince}} ago</p>
+
+
+            </div>
+
+        {% endfor %}
+        {% endif %}
+        </div>
+
+
+
+
+<div class="row">
+            {% if movie %}
+        <p id="cat">Movie</p>
+        {% for v in movie %}
+
+            <div class="tube">
+                <a href="{% url 'show' id=v.id %}">
+                    <img id="img" src="{{v.video_cover_page.url}}" alt="RSI" >
+                </a>
+
+                 <a href="{% url 'show' id=v.id %}">
+                    <p id="title">{{v.video_title|truncatewords:7}}</p>
+                 </a>
+                <a href="{% url 'channel' id=v.id %}">
+                    <p id="channel" >{{v.uploader_name.channel_name|truncatewords:3}}</p>
+                 </a>
+                <p id="date" >{{v.published_day|timesince}} ago</p>
+
+
+            </div>
+
+        {% endfor %}
+        {% endif %}
+        </div>
+
+<div class="row">
+            {% if funny_video %}
+        <p id="cat">Funny Video</p>
+        {% for v in funny_video %}
+
+            <div class="tube">
+                <a href="{% url 'show' id=v.id %}">
+                    <img id="img" src="{{v.video_cover_page.url}}" alt="RSI" >
+                </a>
+
+                 <a href="{% url 'show' id=v.id %}">
+                    <p id="title">{{v.video_title|truncatewords:7}}</p>
+                 </a>
+                <a href="{% url 'channel' id=v.id %}">
+                    <p id="channel" >{{v.uploader_name.channel_name|truncatewords:3}}</p>
+                 </a>
+                <p id="date" >{{v.published_day|timesince}} ago</p>
+
+
+            </div>
+
+        {% endfor %}
+        {% endif %}
+        </div>
+
+
+<div class="row">
+            {% if latest_song %}
+        <p id="cat">Latest Song</p>
+        {% for v in latest_song %}
+
+            <div class="tube">
+                <a href="{% url 'show' id=v.id %}">
+                    <img id="img" src="{{v.video_cover_page.url}}" alt="RSI" >
+                </a>
+
+                 <a href="{% url 'show' id=v.id %}">
+                    <p id="title">{{v.video_title|truncatewords:7}}</p>
+                 </a>
+                <a href="{% url 'channel' id=v.id %}">
+                    <p id="channel" >{{v.uploader_name.channel_name|truncatewords:3}}</p>
+                 </a>
+                <p id="date" >{{v.published_day|timesince}} ago</p>
+
+
+            </div>
+
+        {% endfor %}
+        {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

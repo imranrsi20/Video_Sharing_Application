@@ -1,0 +1,63 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Draft
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+        .video{
+
+            margin-top:20px;
+            margin-left:20px;
+        }
+
+        .play{
+
+            margin-top:20px;
+        }
+         #channel{
+
+            font-size:17px;
+            font-weight:bold;
+            color:gray;
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+{% if request.user.is_superuser or staf %}
+
+    <div class="row">
+        <div class="col-md-5">
+                {% for v in video %}
+
+                    <div class="video">
+                        <a href="{% url 'play_draft' id=v.id %}"><img src="{{v.video_cover_page.url}}" alt="image" height="190" width="350"></a>
+                        <p id="channel">{{v.uploader_name.channel_name}}</p>
+                        <a href="{% url 'published' id=v.id %}" class="btn btn-primary">Published</a>
+                        <a href="{% url 'delete_draft' id=v.id %}" class="btn btn-success">Reject</a>
+                    </div>
+                {% endfor %}
+        </div>
+
+        <div class="col-md-7">
+            <div class="play">
+                        <video src="{{vid.your_video.url}}" height="460px" width="820px" controls="controls" autoplay></video>
+                         <p id="title">{{vid.video_title|truncatewords:12}}</p>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <h1>you are not candidate person.</h1>
+
+{% endif %}
+{% endblock %}
+
+{% block script %}
+
+
+{% endblock %}

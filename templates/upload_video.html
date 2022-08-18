@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Upload - MyTube
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+        body{
+            background:  #c7ecf5  ;
+
+        }
+        label {
+
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: 700;
+            float: left;
+            margin-left: 10px;
+
+        }
+
+        button, input, select {
+
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            margin-left: 10px;
+
+        }
+
+        input{
+
+            width:723px;
+        }
+
+        textarea{
+
+            margin-left: 10px;
+            height:126px;
+            width:676px;
+
+        }
+
+
+        .upload{
+
+            background: #eff8fa ;
+            height:450px;
+            width:900px;
+            margin-top:15px;
+        }
+      .data{
+
+            margin-top:15px;
+            margin-left:20px;
+        }
+        .help{
+            background: #eff8fa ;
+            height:217px;
+            width:900px;
+            margin-top:15px;
+        }
+        .form-control{
+
+            width:700px;
+        }
+        .fun{
+
+            margin-top:5px;
+            margin-left:15px;
+        }
+
+        .help h1{
+
+            font-size:16px;
+            font-weight:bold;
+            padding:10px;
+        }
+        p{
+            margin-left:10px;
+        }
+        .first{
+
+            height: 200px;
+
+            width: 370px;
+
+            background: #eff8fa;
+
+            margin-top: 15px;
+
+            margin-left: 150px;
+        }
+         .second{
+
+            height: 200px;
+
+            width: 370px;
+
+            background: #eff8fa;
+
+            margin-top: 15px;
+
+            margin-left: 150px;
+        }
+         .third{
+
+            height: 200px;
+
+            width: 370px;
+
+            background: #eff8fa;
+
+            margin-top: 15px;
+
+            margin-left: 150px;
+        }
+        #y{
+
+            font-size:18px;
+            font-weight:bold;
+            margin-top:5px;
+            margin-left:15px;
+        }
+
+        #i{
+            margin-left:20px;
+            margin-top:40px;
+            float:left;
+            margin-right:16px;
+        }
+        .right{
+
+            margin-top:50px;
+            margin-left:10px;
+            font-weight:bold
+        }
+        #th{
+
+            margin-left:106px;
+        }
+        #p{
+            float:left;
+            font-size:18px;
+
+        }
+        #h{
+            font-size:22px;
+            color:#eff8fa;
+        }
+        #num{
+            font-size:22px;
+            margin-left:270px;
+        }
+        #publish{
+
+            margin-top:36px;
+            margin-left:340px;
+            width:120px;
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+                <div class="upload">
+                    <div class="data">
+                        <h1 id="h">.</h1>
+                        <h1 id="num">Please Upload your video</h1><br>
+
+                        <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            {{form.as_p}}
+                        <button id="publish" type="submit" class="btn btn-success">Publish</button>
+                    </form>
+                    </div>
+                </div>
+
+                <div class="help">
+                    <div class="fun">
+                        <h1>Help and Suggestions </h1>
+                        <p>Want to upload videos longer than 15 minutes? <a href="#">Increase your limit</a> </p>
+                        <p>By submitting your videos to MyTube, you acknowledge that you agree to MyTube's <a href="#">Terms of Service</a> and <a href="#">Community Guidelines</a> . </p>
+                        <p>Please be sure not to violate others' copyright or privacy rights. <a href="#">Learn more</a> </p>
+                        <p>Upload instructions    |    Troubleshooting    |    Mobile uploads </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="first">
+
+                    <h1 id="y">Import videos </h1>
+                    <img id="i" src="{% static 'image/1.png' %}">
+                    <div class="right">
+                        <p>Import your videos from Google Photos </p>
+                        <button type="button" class="btn btn-success">Important</button>
+                    </div>
+
+                </div>
+                <div class="second">
+                    <h1 id="y">Live streaming </h1>
+                    <img id="i" src="{% static 'image/2.png' %}">
+                    <div class="right">
+                        <p>Set up your channel and stream live to your fans  </p>
+                        <button type="button" class="btn btn-success">Get Started</button>
+                    </div>
+
+                </div>
+                <div class="third">
+                    <h1 id="y">New! Premieres </h1>
+                    <img id="i" src="{% static 'image/3.png' %}">
+                    <div class="right">
+                        <p>Build the hype around your next video release. Premieres makes it easy to promote your video and engage with fans through live chat. </p>
+                        <button id="th" type="button" class="btn btn-success">Learn more</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

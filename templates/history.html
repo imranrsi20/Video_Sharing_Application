@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    History - MyTube
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+
+
+        #h_img{
+
+            height:152px;
+            width:280px;
+            float:left;
+            margin-right:6px;
+
+        }
+        .video{
+
+            float:left;
+            width:603px;
+            margin-top:20px;
+        }
+        #w_title{
+
+
+            text-decoration:none;
+            color:black;
+            font-size:22px;
+
+        }
+        #w_channel{
+
+            text-decoration:none;
+
+            color:gray;
+            font-size:15px;
+            font-weight:bold;
+        }
+
+        #left{
+
+            height: 100%;
+            width:285px;
+            background-color: #e9e6e6;
+            position: fixed;
+
+        }
+
+        .col-md-6{
+
+            margin-left:350px;
+
+        }
+        #right{
+            height: 100%;
+            background-color: #e9e6e6;
+            position: fixed;
+            margin-left:1000px;
+            width:521px;
+
+        }
+
+        ul li{
+
+            list-style:none;
+
+            text-decoration:none;
+
+
+        }
+
+        #left a{
+            text-decoration:none;
+        }
+        #right a{
+
+            text-decoration:none;
+            color:black
+            font-size:18px;
+            font-weight:bold;
+        }
+       ul li a{
+
+
+            font-size:18px;
+            color:black;
+            text-decoration:none;
+        }
+        ul li:hover{
+
+
+            color:blue;
+        }
+
+        #s_history{
+
+            margin-top:50px;
+        }
+
+
+        #right input[type="text"]{
+
+            border:none;
+            border-bottom:1px solid blue;
+            outline:none;
+            height:40px;
+            font-size:17px;
+            width:400px;
+            background:#e9e6e6;
+        }
+
+
+
+
+    </style>
+{% endblock %}
+
+{% block container %}
+
+<div class="row">
+    <div class="col-md-3" id="left"><br>
+        <ul>
+            <li>
+                <a href="{% url 'home' %}"><i id="home" class="fas fa-home"></i>  Home</a>
+            </li><br>
+            <li>
+                <a href="{% url 'history' %}"><i id="home" class="fas fa-history"></i>  History </a>
+            </li><br>
+            <li>
+                <a href="{% url 'show_watch' %}"><i id="home" class="far fa-clock"></i>  Watch Later</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+
+
+
+
+                <h1>Watch History</h1>
+
+
+                {% if video %}
+                    {% for v in video %}
+
+                        <div class="video">
+                            <a href="{% url 'show' id=v.id %}"><img id="h_img" src="{{v.video_cover_page.url}}" alt="image"></a>
+                            <a id="w_title" href="{% url 'show' id=v.id %}">{{v.video_title|truncatewords:8}}</a><br>
+                            <a id="w_channel" href="{% url 'channel' id=v.id %}">{{v.uploader_name.channel_name|truncatewords:3}}</a>
+                        </div>
+
+                    {% endfor %}
+                {% else %}
+                    <p>No watch video</p>
+                {% endif %}
+
+
+
+
+
+    </div>
+
+    <div class="col-md-3" id="right">
+        <input id="s_history" type="text" name="search_history" placeholder="Search watch history..."><br><br><br>
+        <a href="{% url 'clear_history' %}">Clear All Watch History</a>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

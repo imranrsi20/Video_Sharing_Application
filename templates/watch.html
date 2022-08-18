@@ -1,0 +1,283 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Watch Later - MyTube
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+
+
+        #h_img{
+
+            height:152px;
+            width:280px;
+            float:left;
+            margin-right:6px;
+
+        }
+        .video{
+
+            float:left;
+            width:603px;
+            margin-top:20px;
+        }
+        #w_title{
+
+
+            text-decoration:none;
+            color:black;
+            font-size:22px;
+
+        }
+        #w_channel{
+
+            text-decoration:none;
+
+            color:gray;
+            font-size:15px;
+            font-weight:bold;
+        }
+
+        #left{
+
+            height: 100%;
+            width:246px;
+            background-color: #e9e6e6;
+            position: fixed;
+
+        }
+
+        .col-md-6{
+
+            margin-left:796px;
+            width: 47%;
+
+
+        }
+        #right{
+            height: 100%;
+
+            position: fixed;
+            margin-left:247px;
+            width:555px;
+
+        }
+
+        ul li{
+
+            list-style:none;
+
+            text-decoration:none;
+
+
+        }
+
+        #left a{
+            text-decoration:none;
+        }
+
+       ul li a{
+
+
+            font-size:18px;
+            color:black;
+            text-decoration:none;
+        }
+        ul li:hover{
+
+
+            color:blue;
+        }
+
+        #s_history{
+
+            margin-top:50px;
+        }
+        .top{
+
+            height: 35px;
+
+            width: 100%;
+
+            background: blue;
+
+            color: white;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-top: 10px;
+            padding:8px;
+        }
+
+        .uper_b{
+
+            margin-top:10px;
+            height:100px;
+            width:100%;
+            background-image:url('{% static "image/green3.jpg" %}');
+            background-size:cover;
+            background-position:center;
+        }
+        #man{
+
+            margin-left:10px;
+            float:left;
+        }
+
+        #watch{
+
+            font-size:19px;
+            color:white;
+            font-weight:bold;
+            margin-left:173px;
+            padding:34px;
+        }
+        #u_name{
+
+            font-size:17px;
+            font-weight:bold;
+            margin-top:10px;
+            float:left;
+        }
+        #setting{
+
+            float:right;
+            margin-top:10px;
+            font-size:22px;
+            color:gray;
+        }
+        #w_video{
+
+
+            margin-top:45px;
+            font-size:17px;
+            font-weight:bold;
+
+        }
+        #delete{
+
+            float:right;
+            margin-top:53px;
+            text-decoration:none;
+        }
+        #clear{
+
+            font-size:17px;
+            text-decoration:none;
+            font-weight:bold;
+
+        }
+
+        #counter{
+
+
+            float:left;
+            font-size:20px;
+            margin-top:65px;
+            margin-right:5px;
+        }
+
+
+
+
+
+
+
+
+    </style>
+{% endblock %}
+
+{% block container %}
+
+<div class="row">
+    <div class="col-md-3" id="left"><br>
+        <ul>
+            <li>
+                <a href="{% url 'home' %}"><i id="home" class="fas fa-home"></i>  Home</a>
+            </li><br>
+            <li>
+                <a href="{% url 'history' %}"><i id="home" class="fas fa-history"></i>  History </a>
+            </li><br>
+            <li>
+                <a href="{% url 'show_watch' %}"><i id="home" class="far fa-clock"></i>  Watch Later</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-3" id="right">
+
+                <div class="uper_b">
+
+                    {% if user_profile %}
+                        <img id="man" src="{{ user_profile.profile_picture.url }}" alt="image" height="60" width="50">
+                    {% else %}
+
+                        <img id="man" src="{% static 'image/man.jpg' %}" alt="image" height="60" width="50">
+
+                    {% endif %}
+                    <p id="watch">Watch Later</p>
+                </div>
+       <div class="setting">
+            <p id="u_name">{{request.user.first_name}} {{request.user.last_name}}</p>
+            <a id="setting" href="#"><i class="fas fa-cog"></i></a>
+       </div>
+        <div class="watch_video">
+            <p id="w_video">{{video}} videos</p>
+        </div>
+
+        <a id="clear" href="{% url 'clear_watch_later' %}">Clear Watch Later</a>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="top">
+
+            <p>One or more videos have been removed from the playlist because they were deleted from MyTube.</p>
+        </div><br>
+
+
+        {% if w_video %}
+                    {% for w in w_video %}
+
+                        <div class="video">
+                            <p id="counter">{{forloop.counter}}</p>
+                            <a href="{% url 'show' id=w.id %}"><img id="h_img" src="{{w.video_cover_page.url}}" alt="image"></a>
+                            <a id="w_title" href="{% url 'show' id=w.id %}">{{w.video_title|truncatewords:8}}</a><br>
+                            <a id="w_channel" href="{% url 'channel' id=w.id %}">{{w.uploader_name.channel_name|truncatewords:3}}</a>
+                            <a id="delete" href="{% url 'delete_watch' id=w.id %}">Delete</a>
+                        </div>
+
+
+
+                    {% endfor %}
+        {% else %}
+            <p>No watch Later</p>
+        {% endif %}
+
+
+
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
